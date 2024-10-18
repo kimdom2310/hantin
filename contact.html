@@ -137,7 +137,7 @@
     <h2>Thông Tin Liên Hệ</h2>
     <p><strong>Trụ sở chính:</strong> 6 Tiên Sơn 5, Hòa Cường Nam, Hải Châu Đà Nẵng</p>
     <p><strong>Điện thoại:</strong> 0905084885 ; 0706155026</p>
-    <p><strong>Email:</strong> <a href="mailto:info@tinh-tin.com">info@tinh-tin.com</a></p>
+    <p><strong>Email:</strong> <a href="mailto:hantindesign@gmail.com">hantindesign@gmail.com</a></p>
     <div class="social-links">
         <a href="https://zalo.me/<your-zalo-id>" target="_blank">
             <img src="download.png" alt="Zalo" style="width: 40px; height: auto;">
@@ -175,6 +175,37 @@
     <a href="#">Quyền riêng tư</a>
     <a href="#">Điều khoản sử dụng</a>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var form = document.querySelector('.contact-form form');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Ngăn không cho form gửi trực tiếp
+
+        // Lấy dữ liệu từ form
+        var fullname = document.getElementById('fullname').value;
+        var phone = document.getElementById('phone').value;
+        var email = document.getElementById('email').value;
+        var subject = document.getElementById('subject').value;
+        var message = document.getElementById('message').value;
+
+        // Gửi dữ liệu đến trang PHP để xử lý
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'send_mail.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                // Hiển thị phản hồi từ trang PHP
+                alert(xhr.responseText);
+            }
+        };
+        xhr.send('fullname=' + encodeURIComponent(fullname) +
+                 '&phone=' + encodeURIComponent(phone) +
+                 '&email=' + encodeURIComponent(email) +
+                 '&subject=' + encodeURIComponent(subject) +
+                 '&message=' + encodeURIComponent(message));
+    });
+});
+</script>
 
 </body>
 </html>
