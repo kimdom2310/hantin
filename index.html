@@ -49,11 +49,9 @@
             opacity: 1;
         }
         .hero-image {
-            width: 90%; /* Tăng kích thước hình ảnh */
-            max-width: 800px; /* Giới hạn kích thước tối đa */
-            height: auto;
-            margin: 20px auto; /* Căn giữa */
-            border-radius: 5px;
+            width: 100%; /* Thay đổi chiều rộng thành 100% */
+            height: auto; /* Tự động điều chỉnh chiều cao */
+            margin: 0; /* Bỏ margin */
             display: none; /* Ẩn hình ảnh ban đầu */
         }
         .active {
@@ -105,12 +103,55 @@
         .about-section {
             padding: 20px;
             background-color: #fff;
-            margin: 20px 0; /* Giảm margin trên và dưới */
+            margin: 20px 0;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%; /* Đặt chiều rộng 100% */
-            text-align: left; /* Căn lề trái */
-            padding-left: 20px; /* Thêm padding trái */
+            width: 100%;
+            text-align: left;
+            padding-left: 20px;
+        }
+        .additional-images {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 20px auto;
+            padding: 0 10px;
+        }
+        .additional-images img {
+            width: calc(20% - 10px);
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
+            display: block;
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -124,7 +165,6 @@
             <a href="index.html">Trang Chủ</a>
             <a href="about.html">Giới Thiệu</a>
             <a href="duan.html">Dự án/Dịch vụ</a>
-          
             <a href="contact.html">Liên Hệ</a>
         </nav>
     </div>
@@ -134,9 +174,17 @@
     <img src="anh2tc.jpg" alt="Dự Án 2" class="hero-image">
     <img src="anh3tc.jpg" alt="Dự Án 3" class="hero-image">
 
+    <div class="additional-images">
+        <img src="trang chủ 1.jpg" alt="Hình ảnh 1" onclick="openModal(this.src)"/>
+        <img src="trang chủ 4.jpg" alt="Hình ảnh 2" onclick="openModal(this.src)"/>
+        <img src="trang chủ 3.jpg" alt="Hình ảnh 3" onclick="openModal(this.src)"/>
+        <img src="trang chủ 2.jpg" alt="Hình ảnh 4" onclick="openModal(this.src)"/>
+        <img src="trang chủ 5.jpg" alt="Hình ảnh 5" onclick="openModal(this.src)"/>
+    </div>
+
     <div class="about-section">
         <h2>Chào Mừng Đến Với Hàn Tín</h2>
-        <p>Chúng tôi là Công Ty TNHH Tư Vấn Thiết Kế và Đầu Tư Xây Dựng Hàn Tín, một trong những đơn vị hàng đầu trong lĩnh vực xây dựng tại Việt Nam. Với nhiều năm kinh nghiệm trong ngành, chúng tôi tự hào<p> 
+        <p>Chúng tôi là Công Ty TNHH Tư Vấn Thiết Kế và Đầu Tư Xây Dựng Hàn Tín, một trong những đơn vị hàng đầu trong lĩnh vực xây dựng tại Việt Nam. Với nhiều năm kinh nghiệm trong ngành, chúng tôi tự hào</p>
         <p>mang đến những giải pháp xây dựng tối ưu và chất lượng nhất cho khách hàng.</p>
 
         <h3>Sứ Mệnh Của Chúng Tôi</h3>
@@ -159,7 +207,7 @@
         <h2>Thông Tin Liên Hệ</h2>
         <p><strong>Trụ sở chính:</strong> 6 Tiên Sơn 5, Hòa Cường Nam, Hải Châu Đà Nẵng</p>
         <p><strong>Điện thoại:</strong> 0905084885 ; 0706155026</p>
-        <p><strong>Email:</strong> <a href="mailto:info@tinh-tin.com">info@tinh-tin.com</a></p>
+        <p><strong>Email:</strong> <a href="mailto:hantindesign@gmail.com">hantindesign@gmail.com</a></p>
         
         <div class="social-links">
             <a href="https://zalo.me/<your-zalo-id>" target="_blank">
@@ -171,10 +219,10 @@
         </div>
     </div>
     
-    <div class="footer">
-        <h3>Chính sách</h3>
-        <a href="#">Quyền riêng tư</a>
-        <a href="#">Điều khoản sử dụng</a>
+    <!-- Modal -->
+    <div class="modal" id="imageModal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img id="modalImage" src="" alt="Hình ảnh lớn">
     </div>
 
     <script>
@@ -190,6 +238,28 @@
 
         // Chuyển đổi hình ảnh mỗi 3 giây
         setInterval(showNextImage, 3000);
+
+        // Mở modal với hình ảnh lớn
+        function openModal(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = src; // Đặt nguồn hình ảnh cho modal
+            modal.style.display = "flex"; // Hiện modal
+        }
+
+        // Đóng modal
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = "none"; // Ẩn modal
+        }
+
+        // Đóng modal khi nhấp ra ngoài hình ảnh
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
     </script>
 
 </body>

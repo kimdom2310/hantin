@@ -21,7 +21,6 @@
         .logo {
             max-width: 150px;
             height: auto;
-            margin: 0px 0px;
             float: left;
         }
         nav {
@@ -77,6 +76,26 @@
             width: 100%;
             border-radius: 5px;
         }
+        .full-width {
+            width: 100%;
+            height: auto;
+            margin: 10px 0;
+            max-width: 60%; /* Điều chỉnh kích thước để tránh mờ */
+            cursor: pointer; /* Thay đổi con trỏ khi hover */
+        }
+        .full-width:hover {
+            transform: scale(1.05); /* Phóng to nhẹ khi hover */
+            transition: transform 0.3s;
+        }
+        .image-gallery {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .image-gallery img {
+            max-width: 48%; /* Mỗi ảnh chiếm tối đa 48% chiều rộng */
+            margin: 1%; /* Khoảng cách giữa các ảnh */
+        }
         .footer {
             background-color: #4a90e2;
             color: white;
@@ -121,6 +140,12 @@
             margin: 0;
         }
     </style>
+    <script>
+        function openImage(src) {
+            const imageWindow = window.open("", "_blank");
+            imageWindow.document.write(`<html><head><title>Xem Ảnh</title></head><body><img src="${src}" style="width: 100%; height: auto;"/></body></html>`);
+        }
+    </script>
 </head>
 <body>
 
@@ -132,40 +157,48 @@
             <a href="index.html">Trang Chủ</a>
             <a href="about.html">Giới Thiệu</a>
             <a href="duan.html">Dự án/Dịch vụ</a>
-          
             <a href="contact.html">Liên Hệ</a>
         </nav>
     </div>
 
-  
-    
+    <div class="intro-text"> Dịch vụ</div>
 
-   <div class="projects">
-    <div class="project-item">
-        <img src="anhduan2.jpg" alt=""/>
-        <p><b>TƯ VẤN THIẾT KẾ DỰ ÁN</b></p>
+    <div class="projects">
+        <div class="project-item">
+            <img src="anhduan2.jpg" alt="Tư Vấn Thiết Kế Dự Án"/>
+            <p><b>TƯ VẤN THIẾT KẾ DỰ ÁN</b></p>
+        </div>
+        <div class="project-item">
+            <img src="anhduan1.jpg" alt="Thi Công Xây Dựng"/>
+            <p><b>THI CÔNG XÂY DỰNG</b></p>
+        </div>
+        <div class="project-item">
+            <img src="anhduan3.jpg" alt="Quản Lý Dự Án"/>
+            <p><b>QUẢN LÝ DỰ ÁN</b></p>
+        </div>
+        <div class="project-item">
+            <img src="anhduan4.jpg" alt="Bảo Trì Sửa Chữa"/>
+            <p><b>BẢO TRÌ SỬA CHỮA</b></p>
+        </div>
     </div>
-    <div class="project-item">
-        <img src="anhduan1.jpg" alt=""/>
-        <p><b>THI CÔNG XÂY DỰNG</b></p>
-    </div>
-    <div class="project-item">
-        <img src="anhduan3.jpg" alt=""/>
-        <p><b>QUẢN LÝ DỰ ÁN</b></p>
-    </div>
-    <div class="project-item">
-        <img src="anhduan4.jpg" alt=""/>
-        <p><b>BẢO TRÌ SỬA CHỮA</b></p>
-    </div>
-</div>
-        
+
+    <div class="intro-text">Dự án tiêu biểu:</div>
+    <div class="image-gallery">
+        <img class="full-width" src="anh1tc.jpg" alt="" onclick="openImage('anh1tc.jpg')"/>
+        <img class="full-width" src="trang chủ 1.jpg" alt="" onclick="openImage('trang chủ 1.jpg')"/>
+        <img class="full-width" src="anh3tc.jpg" alt="" onclick="openImage('anh3tc.jpg')"/>
+        <img class="full-width" src="anh2tc.jpg" alt="" onclick="openImage('anh2tc.jpg')"/>
+        <img class="full-width" src="trang chủ 2.jpg" alt="" onclick="openImage('trang chủ 2.jpg')"/>
+        <img class="full-width" src="trang chủ 3.jpg" alt="" onclick="openImage('trang chủ 3.jpg')"/>
+        <img class="full-width" src="trang chủ 5.jpg" alt="" onclick="openImage('trang chủ 5.jpg')"/>
+        <img class="full-width" src="trang chủ 4.jpg" alt="" onclick="openImage('trang chủ 4.jpg')"/>
     </div>
 
     <div class="contact-info">
         <h2>Thông Tin Liên Hệ</h2>
         <p><strong>Trụ sở chính:</strong> 6 Tiên Sơn 5, Hòa Cường Nam, Hải Châu Đà Nẵng</p>
         <p><strong>Điện thoại:</strong> 0905084885 ; 0706155026</p>
-        <p><strong>Email:</strong> <a href="mailto:info@tinh-tin.com">info@tinh-tin.com</a></p>
+        <p><strong>Email:</strong> <a href="mailto:hantindesign@gmail.com">info@hantindesign@gmail.com</a></p>
         
         <div class="social-links">
             <a href="https://zalo.me/<your-zalo-id>" target="_blank">
